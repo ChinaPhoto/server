@@ -2,7 +2,16 @@
 
  const url = "mongodb://localhost/test";
 
- const db = mongoose.connection
+ const db = mongoose.connection;
+
+ const glob = require('glob');
+
+ const { resolve } = require('path');
+
+
+ exports.initSchemas = () => {
+     glob.sync(resolve(__dirname, './schema/', '**/*.js')).forEach(require)
+ }
 
  exports.connect = () => {
 
