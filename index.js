@@ -15,7 +15,7 @@ const { connect, initSchemas } = require('./database/init.js')
     let oneUser = new User({ userName: '我是渣渣辉', password: '123456' })
 
     oneUser.save().then(() => {
-        console.log('插入成功')
+        console.log('插入成功 啊')
     })
 
     let users = await User.findOne({}).exec();
