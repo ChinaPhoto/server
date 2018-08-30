@@ -3,29 +3,40 @@ const app = new Koa()
 
 const mongoose = require('mongoose')
 
+const Router = require('koa-router');
+let router = new Router()
+
+let user = require('./appApi/user.js');
+
+router.use('/user', user.routes())
+
 const { connect, initSchemas } = require('./database/init.js')
 
-;
-(async() => {
+app.use(router.routes());
+app.use(router.allowedMethods());
 
-    await connect();
-    initSchemas();
 
-    const User = mongoose.model('User');
-    let oneUser = new User({ userName: '你是猪八戒', password: '123456' })
+// ;
+// (async() => {
 
-    oneUser.save().then(() => {
-        console.log('插入成功')
-    })
+//     await connect();
+//     initSchemas();
 
-    let users = await User.findOne({}).exec();
+//     const User = mongoose.model('User');
+//     let oneUser = new User({ userName: '你是猪八戒', password: '123456' })
 
-    console.log('------------------')
+//     oneUser.save().then(() => {
+//         console.log('插入成功')
+//     })
 
-    console.log(users)
+//     let users = await User.findOne({}).exec();
 
-    console.log('------------------')
-})()
+//     console.log('------------------')
+
+//     console.log(users)
+
+//     console.log('------------------')
+// })()
 
 app.use(async(ctx) => {
     ctx.body = '<h1> 你是渣渣辉啊啊</h1>'
