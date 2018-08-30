@@ -12,7 +12,7 @@ const { connect, initSchemas } = require('./database/init.js')
     initSchemas();
 
     const User = mongoose.model('User');
-    let oneUser = new User({ userName: '我是渣渣辉', password: '123456' })
+    let oneUser = new User({ userName: '你是猪八戒', password: '123456' })
 
     oneUser.save().then(() => {
         console.log('插入成功')
