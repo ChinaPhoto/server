@@ -1,10 +1,17 @@
 const Koa = require('koa')
 const app = new Koa()
-
 const mongoose = require('mongoose')
+const Router = require('koa-router')
+const bodyParser = require('koa-bodyparser')
+const cors = require('koa2-cors')
 
-const Router = require('koa-router');
+
 let router = new Router()
+
+
+app.use(bodyParser());
+app.use(cors())
+
 
 let user = require('./appApi/user.js');
 
@@ -16,27 +23,27 @@ app.use(router.routes());
 app.use(router.allowedMethods());
 
 
-// ;
-// (async() => {
+;
+(async() => {
 
-//     await connect();
-//     initSchemas();
+    await connect();
+    initSchemas();
 
-//     const User = mongoose.model('User');
-//     let oneUser = new User({ userName: '你是猪八戒', password: '123456' })
+    //     const User = mongoose.model('User');
+    //     let oneUser = new User({ userName: '你是猪八戒', password: '123456' })
 
-//     oneUser.save().then(() => {
-//         console.log('插入成功')
-//     })
+    //     oneUser.save().then(() => {
+    //         console.log('插入成功')
+    //     })
 
-//     let users = await User.findOne({}).exec();
+    //     let users = await User.findOne({}).exec();
 
-//     console.log('------------------')
+    //     console.log('------------------')
 
-//     console.log(users)
+    //     console.log(users)
 
-//     console.log('------------------')
-// })()
+    //     console.log('------------------')
+})()
 
 app.use(async(ctx) => {
     ctx.body = '<h1> 你是渣渣辉啊啊</h1>'
