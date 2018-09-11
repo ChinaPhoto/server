@@ -81,4 +81,21 @@ router.get('/insertAllCategorySubInfo', async(ctx) => {
     ctx.body = '数据开始导入'
 })
 
+// 查找接口
+router.post('/getDetailGoodsInfo', async(ctx) => {
+    let goodsId = ctx.request.body.goodsId // 接受到的参数id
+    const Goods = mongoose.model('Goods');
+    await Goods.findOne({ ID: goodsId }).exec()
+        .then(async(result) => {
+            if (result) {
+                ctx.body = { code: 200, status: true, data: result }
+            } else {
+                ctx.body = { code: 200, status: true, data: {}, message: '没有此产品' }
+            }
+        }).catch((err) => {
+            console.log(err);
+            ctx.body = { code: 500, message: err }
+        })
+})
+
 module.exports = router;
