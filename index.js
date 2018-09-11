@@ -4,7 +4,7 @@ const mongoose = require('mongoose')
 const Router = require('koa-router')
 const bodyParser = require('koa-bodyparser')
 const cors = require('koa2-cors')
-
+let goods = require('./appApi/goods.js')
 
 let router = new Router()
 
@@ -16,7 +16,7 @@ app.use(cors())
 let user = require('./appApi/user.js');
 
 router.use('/user', user.routes())
-
+router.use('/goods', goods.routes())
 const { connect, initSchemas } = require('./database/init.js')
 
 app.use(router.routes());
