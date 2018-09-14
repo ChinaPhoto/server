@@ -103,6 +103,7 @@ router.post('/getDetailGoodsInfo', async(ctx) => {
 router.get('/getCategoryList', async(ctx) => {
     try {
         const Category = mongoose.model('Category');
+
         let result = await Category.find().exec()
         ctx.body = { code: 200, status: true, data: result }
     } catch (err) {
@@ -113,10 +114,10 @@ router.get('/getCategoryList', async(ctx) => {
 
 
 // 商品小类接口
-router.post('/getCategorySubList', async(ctx) => {
+router.get('/getCategorySubList', async(ctx) => {
     try {
-        let categoryId = ctx.request.body.categoryId
-            // let categoryId = 1; // 后期替换为别的类型
+        let categoryId = ctx.request.query.categoryId;
+        // let categoryId = 1; // 后期替换为别的类型
         const Category = mongoose.model('CategorySub')
         let result = await Category.find({ MALL_CATEGORY_ID: categoryId }).exec()
         if (result) {
